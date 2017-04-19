@@ -247,7 +247,7 @@
       "Phone Number": "(415) 827-2712",
       "Email Address": "mikefretz@gmail.com",
       "Street 1": "1041A 4th St",
-      "City": "Novato ",
+      "City": "Novato",
       "State": "CA",
       "Zip Code": "94945"
     },

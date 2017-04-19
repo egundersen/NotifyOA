@@ -1,4 +1,21 @@
 
+var brotherhood = true;
+var ordeal = true;
+var non_member = true;
+var vigil = true;
+
+var Larkspur = true;
+var Fairfax = true
+var San_Rafael = true
+var Tiburon = true;
+var Novato = true;
+var Mill_Valley = true;
+var San_Anselmo = true;
+var Corte_Madera = true;
+var Belvedere = true;
+
+var mailingListExample;
+var mailingList;
 var locations = null
 var email = null;
 var phoneNumber = null;
@@ -33,11 +50,22 @@ function filterData(roster) {
         async: false
     });
     readFile("roster.js");
+        var exampleEmails = "erikgundersen.200@gmail.com,brauliocordova3@gmail.com";
+        mailingListExample = exampleEmails.split(',');
+        mailingList = email.slice(0);
     //return name.replace(/(\,.*?)\,/g, "$1<br>");;
-    //var mailingList = Array.from(email)
-    //return mailingList;
-    //return "Working..."
-    return email;
+    sortData("brotherhood", null);
+    return "Working..."
+}
+
+function sortData(toggleLevel, toggleLocation){
+    console.log("SortData Working...")
+    if(toggleLevel == true){
+        toggleLevel = false;
+    }
+    else {
+        toggleLevel = true;
+    }
 }
 
 // Client ID and API key from the Developer Console
@@ -80,6 +108,7 @@ function filterData(roster) {
           authorizeButton.onclick = handleAuthClick;
           signoutButton.onclick = handleSignoutClick;
           sendEmailButton.onclick = handleSendEmailClick;
+          console.log(mailingListExample);
         });
       }
 
@@ -124,8 +153,12 @@ function filterData(roster) {
 
         function sendNewMessage() {
         gapi.client.load('gmail', 'v1', function() {
+            var receiver;
+            for (var i = 0; i < mailingListExample.length; i++) {
+            //Do something
+            receiver = mailingListExample[i];
             // Encode to Base64
-            var to = 'erikgundersen.200@gmail.com',
+            var to = receiver,
                 subject = 'Hello World',
                 content = 'send a Gmail.'
 
@@ -133,7 +166,7 @@ function filterData(roster) {
                   "Content-Type:  text/plain; charset=\"UTF-8\"\n" +
                   "Content-length: 5000\n" +
                   "Content-Transfer-Encoding: message/rfc2822\n" +
-                  "to: erikgundersen.200@gmail.com\n" +
+                  "to: " + receiver + "\n" +
                   "from: \"test\" <erikgundersen.200@gmail.com>\n" +
                   "subject: Hello world\n\n" +
 
@@ -151,8 +184,8 @@ function filterData(roster) {
             request.execute(function(response){
              console.log(response);
             });
+            }
           });
-
         }
 
       /**
