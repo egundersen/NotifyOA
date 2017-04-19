@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gmail API Quickstart</title>
+    <meta charset='utf-8' />
+    <link rel="stylesheet" href="spreadsheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="roster.js"></script>
+    <script language="javascript" type="text/javascript" src="notify.js"></script>
+  </head>
+  <body>
+    <table class="formdata">
+      <caption>2017 Lodge Roster</caption>
+      <tr>
+        <th></th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Level</th>
+        <th scope="col">Y/A</th>
+        <th scope="col">Phone #</th>
+        <th scope="col">Email Address</th>
+      </tr>
+      <tr>
+        <th scope="row">1</th>
+        <td><input type="text" name="cFN" id="cFN" /></td>
+        <td><input type="text" name="cL" id="cL" /></td>
+        <td><input type="text" name="cYA" id="cYA" /></td>
+        <td><input type="text" name="cPN" id="cPN" /></td>
+        <td><input type="text" name="cEA" id="cEA" /></td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td><input type="text" name="dFN" id="dFN" /></td>
+        <td><input type="text" name="dL" id="dL" /></td>
+        <td><input type="text" name="dYA" id="dYA" /></td>
+        <td><input type="text" name="dPN" id="dPN" /></td>
+        <td><input type="text" name="cEA" id="cEA" /></td>
+      </tr>
+      <tr>
+        <td>
+            <script type="text/javascript">
+                document.write(filterData("roster.js"))
+            </script>
+        </td>
+      </tr>
+    </table>
+    <div><input type="submit" name="btnSubmit" id="btnSubmit" value="Add Data" /></div>
+    <p>Gmail API W0RK1NG</p>
+
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize-button" style="display: none;">Authorize</button>
+    <button id="signout-button" style="display: none;">Sign Out</button>
+    <button id="send-email-button" style="display: none;">Send Mail</button>
+
+    <pre id="content"></pre>
+
+    <script type="text/javascript" src="notify.js">
+
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+  </body>
+</html>

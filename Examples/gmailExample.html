@@ -1,46 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gmail API Quickstart</title>
+    <meta charset='utf-8' />
+  </head>
+  <body>
+    <p>Gmail API Quickstart</p>
 
-var locations = null
-var email = null;
-var phoneNumber = null;
-var level = null;
-var name = null;
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize-button" style="display: none;">Authorize</button>
+    <button id="signout-button" style="display: none;">Sign Out</button>
+    <button id="send-email-button" style="display: none;">Send Mail</button>
 
-function readFile(roster) {
-    $.getJSON(roster, function(json) {
-        var myData = json;
-        //console.log(myData.All[0].City)
-        //console.log(myData)
+    <pre id="content"></pre>
 
-        // Search by Location
-        locations = myData.All.map(function(a) {return a.City;});
-
-        // Search by Email
-        email = myData.All.map(function(a) {return a["Email Address"];});
-
-        //Search by Phone Number
-        phoneNumber = myData.All.map(function(a) {return a["Phone Number"];});
-
-        //Search by Level
-        level = myData.All.map(function(a) {return a.level;});
-
-        //Search by Name
-        name = myData.All.map(function(a) {return a["Full Name"];});
-    });
-}
-
-function filterData(roster) {
-    $.ajaxSetup({
-        async: false
-    });
-    readFile("roster.js");
-    //return name.replace(/(\,.*?)\,/g, "$1<br>");;
-    //var mailingList = Array.from(email)
-    //return mailingList;
-    //return "Working..."
-    return email;
-}
-
-// Client ID and API key from the Developer Console
+    <script type="text/javascript">
+      // Client ID and API key from the Developer Console
       var CLIENT_ID = '996403111728-re3kbokqm6f1qo8go3f02rcigfet4j7s';
 
       // Array of API discovery doc URLs for APIs used by the quickstart
@@ -188,3 +163,12 @@ function filterData(roster) {
           }
         });
       }
+
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+  </body>
+</html>
