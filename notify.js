@@ -1,3 +1,5 @@
+//Temporary Variables
+var mailingListExample;
 
 var brotherhood = true;
 var ordeal = true;
@@ -14,83 +16,97 @@ var San_Anselmo = true;
 var Corte_Madera = true;
 var Belvedere = true;
 
-var OALevel
-var OALocation
 
-var mailingListExample;
-var mailingList;
-var messagingList;
+
+var dynamicRoster;
+var staticRoster;
+var myData = null;
 var locations = null
 var email = null;
 var phoneNumber = null;
 var level = null;
 var name = null;
 
+//## This function is called on startup. It starts every other function
+function initialize(roster){
+    filterData(roster);
+    seperateData();
+    console.log(dynamicRoster);
+    // This is a toggle Brotherhood button. Delete this and move it to HTML
+    sortData(brotherhood, null);
+    sortData(brotherhood, null);
+    sortData(brotherhood, null);
+}
+
+//## Read Roster from JSON file and store data in 'myData'
 function readFile(roster) {
     $.getJSON(roster, function(json) {
-        var myData = json;
-        //console.log(myData.All[0].City)
-        //console.log(myData)
-
-        // Search by Location
-        locations = myData.All.map(function(a) {return a.City;});
-
-        // Search by Email
-        email = myData.All.map(function(a) {return a["Email Address"];});
-
-        //Search by Phone Number
-        phoneNumber = myData.All.map(function(a) {return a["Phone Number"];});
-
-        //Search by Level
-        level = myData.All.map(function(a) {return a.Level;});
-
-        //Search by Name
-        name = myData.All.map(function(a) {return a["Full Name"];});
+        myData = json;
     });
 }
 
+//## Create new mailing list from ajax list
 function filterData(roster) {
     $.ajaxSetup({
         async: false
     });
     readFile("roster.js");
-        var exampleEmails = "erikgundersen.200@gmail.com,brauliocordova3@gmail.com";
-        mailingListExample = exampleEmails.split(',');
-        mailingList = email.slice(0);
-        messagingList = phoneNumber.slice(0);
+    var exampleEmails = "erikgundersen.200@gmail.com,brauliocordova3@gmail.com,null";
+    mailingListExample = exampleEmails.split(',');
+    //console.log(myData.All[0].City)
 
-        OALevel = level.slice(0);
-        OALocation = locations.slice(0);
-    //return name.replace(/(\,.*?)\,/g, "$1<br>");;
-
-    // Disable Brotherhood button
-    sortData(brotherhood, null);
-
-    return "Working..."
+    //Set ajax Array equal to new static & dynamic arrays
+    staticRoster = JSON.parse(JSON.stringify(myData));
+    dynamicRoster = myData;
 }
 
+//## Called every time someone presses a button. This disables/enables levels & location searches
 function sortData(toggleLevel, toggleLocation){
-    console.log("SortData Working...")
+    console.log("SortData called...")
+    var indexes = getAllIndexes(level, "Brotherhood"); //REPLACE these to: level, location, etc & toggleLevel.toString()
     if(toggleLevel == true){
+        for (var i = indexes.length -1; i >= 0; i--)
+        dynamicRoster.All[indexes[i]] = null;
+        console.log(dynamicRoster);
         toggleLevel = false;
     }
-    else {
+    else if(toggleLevel == false){
+        for (var i = indexes.length -1; i >= 0; i--)
+        dynamicRoster.All[indexes[i]] = staticRoster.All[indexes[i]];
+        console.log(dynamicRoster);
         toggleLevel = true;
     }
     brotherhood = toggleLevel;
-    //console.log(brotherhood);
-    //console.log(OALevel);
+    document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+}
 
-    /* Boot List:
-     * Search's Roster for Info
-     * Saves email, name, level, locations
-     *
-    */
+//## Find all array indexes with specific value
+function getAllIndexes(arr, val) {
+    var indexes = [], i;
+    for(i = 0; i < arr.length; i++)
+        if (arr[i] === val)
+            indexes.push(i);
+    return indexes;
+}
 
-    //Find INDEX's of ALL objects with "brotherhood" in them.
-    //Remove specified index's
-    //Display Names of ALL Index's (remaining)
-    //Email Remaining Index's
+//## Seperate Roster data into multiple sections
+function seperateData() {
+    console.log("Data Seperation Called")
+    // Search by Location
+    locations = dynamicRoster.All.map(function(a) {return a.City;});
+
+    // There may be an error where email never has anything removed from it. If this occurs, place 'email' right before 'for' loop below :D
+    // Search by Email
+    email = dynamicRoster.All.map(function(a) {return a["Email Address"];});
+
+    //Search by Phone Number
+    phoneNumber = dynamicRoster.All.map(function(a) {return a["Phone Number"];});
+
+    //Search by Level
+    level = dynamicRoster.All.map(function(a) {return a.Level;});
+
+    //Search by Name
+    name = dynamicRoster.All.map(function(a) {return a["Full Name"];});
 }
 
 // Client ID and API key from the Developer Console
@@ -133,7 +149,9 @@ function sortData(toggleLevel, toggleLocation){
           authorizeButton.onclick = handleAuthClick;
           signoutButton.onclick = handleSignoutClick;
           sendEmailButton.onclick = handleSendEmailClick;
+
           console.log(mailingListExample);
+          console.log("placeholder emails have been sent...");
         });
       }
 
@@ -179,9 +197,9 @@ function sortData(toggleLevel, toggleLocation){
         function sendNewMessage() {
         gapi.client.load('gmail', 'v1', function() {
             var receiver;
-            for (var i = 0; i < mailingListExample.length; i++) {
+            for (var i = 0; i < mailingListExample.length; i++) { //replace [mailingListExample] w/ [email]
             //Do something
-            receiver = mailingListExample[i];
+            receiver = mailingListExample[i]; //replace [mailingListExample] w/ [email]
             // Encode to Base64
             var to = receiver,
                 subject = 'Hello World',
