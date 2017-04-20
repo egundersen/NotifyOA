@@ -1,4 +1,4 @@
-//Temporary Variables
+//Temporary Variables (This will all be removed later, so theyeres no point paying attention to them :p)
 var mailingListExample;
 
 var brotherhood = true;
@@ -15,7 +15,7 @@ var Mill_Valley = true;
 var San_Anselmo = true;
 var Corte_Madera = true;
 var Belvedere = true;
-
+//End of temporary variables
 
 
 var dynamicRoster;
@@ -32,7 +32,8 @@ function initialize(roster){
     filterData(roster);
     seperateData();
     console.log(dynamicRoster);
-    // This is a toggle Brotherhood button. Delete this and move it to HTML
+
+    // This is a make-shift temporary toggle Brotherhood button. [[ I will Delete this and move it to HTML ]]
     sortData(brotherhood, null);
     sortData(brotherhood, null);
     sortData(brotherhood, null);
@@ -45,7 +46,7 @@ function readFile(roster) {
     });
 }
 
-//## Create new mailing list from ajax list
+//## Create new "rosters" using the ajax roster we created above /\
 function filterData(roster) {
     $.ajaxSetup({
         async: false
@@ -89,178 +90,173 @@ function getAllIndexes(arr, val) {
     return indexes;
 }
 
-//## Seperate Roster data into multiple sections
+//## Seperate Roster data into multiple (easily manageable) sections
 function seperateData() {
-    console.log("Data Seperation Called")
     // Search by Location
     locations = dynamicRoster.All.map(function(a) {return a.City;});
-
-    // There may be an error where email never has anything removed from it. If this occurs, place 'email' right before 'for' loop below :D
+    // [[NOTICE]]: There may be an error where email never has anything removed from it. If this occurs, place 'email' right above 'for' loop below :D
     // Search by Email
     email = dynamicRoster.All.map(function(a) {return a["Email Address"];});
-
     //Search by Phone Number
     phoneNumber = dynamicRoster.All.map(function(a) {return a["Phone Number"];});
-
     //Search by Level
     level = dynamicRoster.All.map(function(a) {return a.Level;});
-
     //Search by Name
     name = dynamicRoster.All.map(function(a) {return a["Full Name"];});
 }
 
-// Client ID and API key from the Developer Console
-      var CLIENT_ID = '996403111728-re3kbokqm6f1qo8go3f02rcigfet4j7s';
+// Client ID and API key from the Google Developer Console
+var CLIENT_ID = '996403111728-re3kbokqm6f1qo8go3f02rcigfet4j7s';
 
-      // Array of API discovery doc URLs for APIs used by the quickstart
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
+// Array of API discovery doc URLs for APIs used by the quickstart
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
 
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      var SCOPES = 'https://mail.google.com/';
+// Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+var SCOPES = 'https://mail.google.com/';
 
 
-      var authorizeButton = document.getElementById('authorize-button');
-      var signoutButton = document.getElementById('signout-button');
-      var sendEmailButton = document.getElementById('send-email-button');
+var authorizeButton = document.getElementById('authorize-button');
+var signoutButton = document.getElementById('signout-button');
+var sendEmailButton = document.getElementById('send-email-button');
 
-      /**
-       *  On load, called to load the auth2 library and API client library.
-       */
-      function handleClientLoad() {
-        gapi.load('client:auth2', initClient);
-      }
+/**
+ *  On load, called to load the auth2 library and API client library.
+ */
+function handleClientLoad() {
+  gapi.load('client:auth2', initClient);
+}
 
-      /**
-       *  Initializes the API client library and sets up sign-in state
-       *  listeners.
-       */
-      function initClient() {
-        gapi.client.init({
-          discoveryDocs: DISCOVERY_DOCS,
-          clientId: CLIENT_ID,
-          scope: SCOPES
-        }).then(function () {
-          // Listen for sign-in state changes.
-          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+/**
+ *  Initializes the API client library and sets up sign-in state
+ *  listeners.
+ */
+function initClient() {
+  gapi.client.init({
+    discoveryDocs: DISCOVERY_DOCS,
+    clientId: CLIENT_ID,
+    scope: SCOPES
+  }).then(function () {
+    // Listen for sign-in state changes.
+    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
-          // Handle the initial sign-in state.
-          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          authorizeButton.onclick = handleAuthClick;
-          signoutButton.onclick = handleSignoutClick;
-          sendEmailButton.onclick = handleSendEmailClick;
+    // Handle the initial sign-in state.
+    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    authorizeButton.onclick = handleAuthClick;
+     signoutButton.onclick = handleSignoutClick;
+     sendEmailButton.onclick = handleSendEmailClick;
 
-          console.log(mailingListExample);
-          console.log("placeholder emails have been sent...");
-        });
-      }
+     console.log(mailingListExample);
+     console.log("placeholder emails have been sent...");
+  });
+}
 
-      /**
-       *  Called when the signed in status changes, to update the UI
-       *  appropriately. After a sign-in, the API is called.
-       */
-      function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-          authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
-          sendEmailButton.style.display = 'block';
-          listLabels();
-        } else {
-          authorizeButton.style.display = 'block';
-          signoutButton.style.display = 'none';
-          sendEmailButton.style.display = 'none';
-        }
-      }
+/**
+ *  Called when the signed in status changes, to update the UI
+ *  appropriately. After a sign-in, the API is called.
+ */
+function updateSigninStatus(isSignedIn) {
+  if (isSignedIn) {
+    authorizeButton.style.display = 'none';
+    signoutButton.style.display = 'block';
+    sendEmailButton.style.display = 'block';
+    listLabels();
+  } else {
+    authorizeButton.style.display = 'block';
+    signoutButton.style.display = 'none';
+    sendEmailButton.style.display = 'none';
+  }
+}
 
-      /**
-       *  Sign in the user upon button click.
-       */
-      function handleAuthClick(event) {
-        gapi.auth2.getAuthInstance().signIn();
-      }
+/**
+ *  Sign in the user upon button click.
+ */
+function handleAuthClick(event) {
+    gapi.auth2.getAuthInstance().signIn();
+}
 
-      /**
-       *  Sign out the user upon button click.
-       */
-      function handleSignoutClick(event) {
-        gapi.auth2.getAuthInstance().signOut();
-      }
+/**
+ *  Sign out the user upon button click.
+ */
+function handleSignoutClick(event) {
+    gapi.auth2.getAuthInstance().signOut();
+}
 
-      /**
-       *  Send an email upon button click.
-       */
-      function handleSendEmailClick(event) {
-          console.log("Handling sendNewMessage()...");
-          sendNewMessage();
-      }
+/**
+ *  Send an email upon button click.
+ */
+function handleSendEmailClick(event) {
+    console.log("Handling sendNewMessage()...");
+    sendNewMessage();
+}
 
-        function sendNewMessage() {
-        gapi.client.load('gmail', 'v1', function() {
-            var receiver;
-            for (var i = 0; i < mailingListExample.length; i++) { //replace [mailingListExample] w/ [email]
-            //Do something
+//## Simply Put, this function takes every email left on the roster after filtering (dynamicRoster), encodes the message/emails into Base64, and finally sends the email
+function sendNewMessage() {
+    gapi.client.load('gmail', 'v1', function() {
+        var receiver;
+        for (var i = 0; i < mailingListExample.length; i++) { //replace [mailingListExample] w/ [email]
             receiver = mailingListExample[i]; //replace [mailingListExample] w/ [email]
+
             // Encode to Base64
             var to = receiver,
-                subject = 'Hello World',
-                content = 'send a Gmail.'
+            subject = 'Hello World',
+            content = 'send a Gmail.'
 
             var base64EncodedEmail = btoa(
-                  "Content-Type:  text/plain; charset=\"UTF-8\"\n" +
-                  "Content-length: 5000\n" +
-                  "Content-Transfer-Encoding: message/rfc2822\n" +
-                  "to: " + receiver + "\n" +
-                  "from: \"test\" <erikgundersen.200@gmail.com>\n" +
-                  "subject: Hello world\n\n" +
+                "Content-Type:  text/plain; charset=\"UTF-8\"\n" +
+                "Content-length: 5000\n" +
+                "Content-Transfer-Encoding: message/rfc2822\n" +
+                "to: " + receiver + "\n" +
+                "from: \"test\" <erikgundersen.200@gmail.com>\n" +
+                "subject: Hello world\n\n" +
 
-                  "The actual message text goes here"
-                    ).replace(/\+/g, '-').replace(/\//g, '_');
+                "The actual message text goes here"
+            ).replace(/\+/g, '-').replace(/\//g, '_');
 
             var mail= base64EncodedEmail;
-            console.log(mail);
+                console.log(mail);
             var request = gapi.client.gmail.users.messages.send({
-              'userId': "me",
-              'resource': {
-                  'raw': mail
+                'userId': "me",
+                'resource': {
+                    'raw': mail
                 }
             });
             request.execute(function(response){
-             console.log(response);
+                console.log(response);
             });
-            }
-          });
         }
+    });
+}
 
-      /**
-       * Append a pre element to the body containing the given message
-       * as its text node. Used to display the results of the API call.
-       *
-       * @param {string} message Text to be placed in pre element.
-       */
-      function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-      }
+/**
+ * Append a pre element to the body containing the given message
+ * as its text node. Used to display the results of the API call.
+ * @param {string} message Text to be placed in pre element.
+ */
+function appendPre(message) {
+    var pre = document.getElementById('content');
+    var textContent = document.createTextNode(message + '\n');
+    pre.appendChild(textContent);
+}
 
-      /**
-       * Print all Labels in the authorized user's inbox. If no labels
-       * are found an appropriate message is printed.
-       */
-      function listLabels() {
-        gapi.client.gmail.users.labels.list({
-          'userId': 'me'
-        }).then(function(response) {
-          var labels = response.result.labels;
-          appendPre('Labels:');
+/**
+ * Print all Labels in the authorized user's inbox. If no labels
+ * are found an appropriate message is printed.
+ */
+function listLabels() {
+    gapi.client.gmail.users.labels.list({
+        'userId': 'me'
+    }).then(function(response) {
+        var labels = response.result.labels;
+        appendPre('Labels:');
 
-          if (labels && labels.length > 0) {
+        if (labels && labels.length > 0) {
             for (i = 0; i < labels.length; i++) {
-              var label = labels[i];
-              appendPre(label.name)
+                var label = labels[i];
+                appendPre(label.name)
             }
-          } else {
+        } else {
             appendPre('No Labels found.');
-          }
-        });
-      }
+        }
+    });
+}
