@@ -14,8 +14,12 @@ var San_Anselmo = true;
 var Corte_Madera = true;
 var Belvedere = true;
 
+var OALevel
+var OALocation
+
 var mailingListExample;
 var mailingList;
+var messagingList;
 var locations = null
 var email = null;
 var phoneNumber = null;
@@ -38,7 +42,7 @@ function readFile(roster) {
         phoneNumber = myData.All.map(function(a) {return a["Phone Number"];});
 
         //Search by Level
-        level = myData.All.map(function(a) {return a.level;});
+        level = myData.All.map(function(a) {return a.Level;});
 
         //Search by Name
         name = myData.All.map(function(a) {return a["Full Name"];});
@@ -53,8 +57,15 @@ function filterData(roster) {
         var exampleEmails = "erikgundersen.200@gmail.com,brauliocordova3@gmail.com";
         mailingListExample = exampleEmails.split(',');
         mailingList = email.slice(0);
+        messagingList = phoneNumber.slice(0);
+
+        OALevel = level.slice(0);
+        OALocation = locations.slice(0);
     //return name.replace(/(\,.*?)\,/g, "$1<br>");;
-    sortData("brotherhood", null);
+
+    // Disable Brotherhood button
+    sortData(brotherhood, null);
+
     return "Working..."
 }
 
@@ -66,6 +77,20 @@ function sortData(toggleLevel, toggleLocation){
     else {
         toggleLevel = true;
     }
+    brotherhood = toggleLevel;
+    //console.log(brotherhood);
+    //console.log(OALevel);
+
+    /* Boot List:
+     * Search's Roster for Info
+     * Saves email, name, level, locations
+     *
+    */
+
+    //Find INDEX's of ALL objects with "brotherhood" in them.
+    //Remove specified index's
+    //Display Names of ALL Index's (remaining)
+    //Email Remaining Index's
 }
 
 // Client ID and API key from the Developer Console
