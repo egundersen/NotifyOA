@@ -1,42 +1,27 @@
 //Temporary Variables (This will all be removed later, so theyeres no point paying attention to them :p)
 var mailingListExample;
-
-var brotherhood = true;
-var ordeal = true;
-var non_member = true;
-var vigil = true;
-
-var Larkspur = true;
-var Fairfax = true
-var San_Rafael = true
-var Tiburon = true;
-var Novato = true;
-var Mill_Valley = true;
-var San_Anselmo = true;
-var Corte_Madera = true;
-var Belvedere = true;
 //End of temporary variables
-
 
 var dynamicRoster;
 var staticRoster;
 var myData = null;
+var level = null;
 var locations = null
 var email = null;
 var phoneNumber = null;
-var level = null;
 var name = null;
 
 //## This function is called on startup. It starts every other function
 function initialize(roster){
     filterData(roster);
     staticSeperation();
+    document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
     console.log(dynamicRoster);
 
     // This is a make-shift temporary toggle Brotherhood button. [[ I will Delete this and move it to HTML ]]
-    sortData(brotherhood, null);
-    sortData(brotherhood, null);
-    sortData(brotherhood, null);
+    //sortData(brotherhood, null);
+    //sortData(brotherhood, null);
+    //sortData(brotherhood, null);
 }
 
 //## Read Roster from JSON file and store data in 'myData'
@@ -52,7 +37,7 @@ function filterData(roster) {
         async: false
     });
     readFile("roster.js");
-    var exampleEmails = "erikgundersen.200@gmail.com,brauliocordova3@gmail.com,null";
+    var exampleEmails = "erikgundersen.200@gmail.com,brauliocordova3@gmail.com,555";
     mailingListExample = exampleEmails.split(',');
     //console.log(myData.All[0].City)
 
@@ -63,24 +48,59 @@ function filterData(roster) {
 }
 
 //## Called every time someone presses a button. This disables/enables levels & location searches
-function sortData(toggleLevel, toggleLocation){
+function sortData(toggle, attribute){
+    /*staticSeperation();
     dynamicSeperation();
     console.log("SortData called...")
-    var indexes = getAllIndexes(level, "Brotherhood"); //REPLACE these to: level, location, etc & toggleLevel.toString()
-    if(toggleLevel == true){
+    var indexes = getAllIndexes(eval(attribute), toggle);
+    if (dynamicRoster.All[indexes[0]] != 555) {
         for (var i = indexes.length -1; i >= 0; i--)
-        dynamicRoster.All[indexes[i]] = null;
-        console.log(dynamicRoster);
-        toggleLevel = false;
+            dynamicRoster.All[indexes[i]] = 555;
+            console.log("All Names Removed, add names...")
+            console.log(dynamicRoster);
+            // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
+            //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+            return "Exit"
     }
-    else if(toggleLevel == false){
+    if (dynamicRoster.All[indexes[0]] == 555) {
         for (var i = indexes.length -1; i >= 0; i--)
-        dynamicRoster.All[indexes[i]] = staticRoster.All[indexes[i]];
-        console.log(dynamicRoster);
-        toggleLevel = true;
+            dynamicRoster.All[indexes[i]] = staticRoster.All[indexes[i]];
+            console.log("All Names Includes, removing names...")
+            console.log(dynamicRoster);
+            // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
+            //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+            return "Exit"
+    }*/
+    staticSeperation();
+    dynamicSeperation();
+    console.log("SortData called...")
+    var indexes = getAllIndexes(eval(attribute), toggle);
+    var attributeVariable = eval(attribute)
+    console.log(eval(attribute)[indexes[0]]);
+    if (eval(attribute)[indexes[0]] != 555) {
+        for (var i = indexes.length -1; i >= 0; i--) {
+            eval(attribute)[indexes[i]] = 555;
+            dynamicRoster.All[indexes[i]] = 555;
+        }
+            console.log("All Names Removed, add names...")
+            console.log(dynamicRoster);
+            // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
+            //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+            return "Exit"
     }
-    brotherhood = toggleLevel;
-    document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+    if (eval(attribute)[indexes[0]] == 555) {
+        console.log("Oh... look at that!@!!!!!!!!!!!!!!!!!!!!!")
+        for (var i = indexes.length -1; i >= 0; i--) {
+            eval(attribute)[indexes[i]] = staticRoster.All.map(function(a) {return a.attributeVariable;});
+            dynamicRoster.All[indexes[i]] = staticRoster.All[indexes[i]];
+        }
+            //console.log(staticRoster.All.map(function(a) {return a.eval(attribute);}));
+            console.log("All Names Includes, removing names...")
+            console.log(dynamicRoster);
+            // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
+            //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+            return "Exit"
+    }
 }
 
 //## Find all array indexes with specific value
@@ -92,13 +112,18 @@ function getAllIndexes(arr, val) {
     return indexes;
 }
 
+function displayEmails() {
+    dynamicSeperation();
+    console.log(email);
+}
+
 //## Seperate Roster data into multiple (easily manageable) sections
 function staticSeperation() {
     dynamicSeperation();
     // Search by Location
-    locations = dynamicRoster.All.map(function(a) {return a.City;});
+    locations = staticRoster.All.map(function(a) {return a.City;});
     //Search by Level
-    level = dynamicRoster.All.map(function(a) {return a.Level;});
+    level = staticRoster.All.map(function(a) {return a.Level;});
 }
 
 //## Updates the new update and email lists
