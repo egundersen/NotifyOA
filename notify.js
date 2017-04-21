@@ -30,7 +30,7 @@ var name = null;
 //## This function is called on startup. It starts every other function
 function initialize(roster){
     filterData(roster);
-    seperateData();
+    staticSeperation();
     console.log(dynamicRoster);
 
     // This is a make-shift temporary toggle Brotherhood button. [[ I will Delete this and move it to HTML ]]
@@ -59,10 +59,12 @@ function filterData(roster) {
     //Set ajax Array equal to new static & dynamic arrays
     staticRoster = JSON.parse(JSON.stringify(myData));
     dynamicRoster = myData;
+
 }
 
 //## Called every time someone presses a button. This disables/enables levels & location searches
 function sortData(toggleLevel, toggleLocation){
+    dynamicSeperation();
     console.log("SortData called...")
     var indexes = getAllIndexes(level, "Brotherhood"); //REPLACE these to: level, location, etc & toggleLevel.toString()
     if(toggleLevel == true){
@@ -91,18 +93,23 @@ function getAllIndexes(arr, val) {
 }
 
 //## Seperate Roster data into multiple (easily manageable) sections
-function seperateData() {
+function staticSeperation() {
+    dynamicSeperation();
     // Search by Location
     locations = dynamicRoster.All.map(function(a) {return a.City;});
+    //Search by Level
+    level = dynamicRoster.All.map(function(a) {return a.Level;});
+}
+
+//## Updates the new update and email lists
+function dynamicSeperation() {
+    //Search by Name
+    name = dynamicRoster.All.map(function(a) {return a["Full Name"];});
     // [[NOTICE]]: There may be an error where email never has anything removed from it. If this occurs, place 'email' right above 'for' loop below :D
     // Search by Email
     email = dynamicRoster.All.map(function(a) {return a["Email Address"];});
     //Search by Phone Number
     phoneNumber = dynamicRoster.All.map(function(a) {return a["Phone Number"];});
-    //Search by Level
-    level = dynamicRoster.All.map(function(a) {return a.Level;});
-    //Search by Name
-    name = dynamicRoster.All.map(function(a) {return a["Full Name"];});
 }
 
 // Client ID and API key from the Google Developer Console
@@ -192,6 +199,7 @@ function handleSendEmailClick(event) {
 
 //## Simply Put, this function takes every email left on the roster after filtering (dynamicRoster), encodes the message/emails into Base64, and finally sends the email
 function sendNewMessage() {
+    dynamicSeperation();
     gapi.client.load('gmail', 'v1', function() {
         var receiver;
         for (var i = 0; i < mailingListExample.length; i++) { //replace [mailingListExample] w/ [email]
