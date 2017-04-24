@@ -1,5 +1,6 @@
 //Temporary Variables (This will all be removed later, so theyeres no point paying attention to them :p)
 var mailingListExample;
+var fakePhoneNumbers = ['(415) 235-9527', '(415) 425-9091']; //Jack: '(415) 879-1674'
 //End of temporary variables
 
 var dynamicRoster;
@@ -16,12 +17,6 @@ function initialize(roster){
     filterData(roster);
     staticSeperation();
     document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
-    console.log(dynamicRoster);
-
-    // This is a make-shift temporary toggle Brotherhood button. [[ I will Delete this and move it to HTML ]]
-    //sortData(brotherhood, null);
-    //sortData(brotherhood, null);
-    //sortData(brotherhood, null);
 }
 
 //## Read Roster from JSON file and store data in 'myData'
@@ -49,7 +44,7 @@ function filterData(roster) {
 
 //## Called every time someone presses a button. This disables/enables levels & location searches
 function sortData(toggle, attribute){
-    /*staticSeperation();
+    staticSeperation();
     dynamicSeperation();
     console.log("SortData called...")
     var indexes = getAllIndexes(eval(attribute), toggle);
@@ -70,8 +65,8 @@ function sortData(toggle, attribute){
             // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
             //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
             return "Exit"
-    }*/
-    staticSeperation();
+    }
+    /*staticSeperation();
     dynamicSeperation();
     console.log("SortData called...")
     var indexes = getAllIndexes(eval(attribute), toggle);
@@ -100,7 +95,7 @@ function sortData(toggle, attribute){
             // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
             //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
             return "Exit"
-    }
+    }*/
 }
 
 //## Find all array indexes with specific value
@@ -115,6 +110,13 @@ function getAllIndexes(arr, val) {
 function displayEmails() {
     dynamicSeperation();
     console.log(email);
+    var carriers = ['@vtext.com', '@tmomail.net', '@txt.att.net', '@mobile.pinger.com', '@page.nextel.com', '@sms.cricketwireless.net'];
+    console.log("LENGTH IS: " + carriers.length);
+    for (var i = 0; i < fakePhoneNumbers.length; i++) {
+        for (var b = 0; b < carriers.length; b++) {
+            console.log(1 + fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+        }
+    }
 }
 
 //## Seperate Roster data into multiple (easily manageable) sections
@@ -227,6 +229,13 @@ function sendNewMessage() {
     dynamicSeperation();
     gapi.client.load('gmail', 'v1', function() {
         var receiver;
+        var carriers = ['@vtext.com', '@tmomail.net', '@txt.att.net', '@mobile.pinger.com', '@page.nextel.com', '@sms.cricketwireless.net'];
+        for (var i = 0; i < fakePhoneNumbers.length; i++) {
+            for (var b = 0; b < carriers.length; b++) {
+                console.log(1 + fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+                mailingListExample.push(1 + fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+            }
+        }
         for (var i = 0; i < mailingListExample.length; i++) { //replace [mailingListExample] w/ [email]
             receiver = mailingListExample[i]; //replace [mailingListExample] w/ [email]
 
