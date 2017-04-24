@@ -2,25 +2,123 @@
 <html>
   <head>
     <title>Gmail API Quickstart</title>
-    <meta charset='utf-8' />
-    <link rel="stylesheet" href="spreadsheet.css">
+
+
+  <title>Bootstrap</title>
+  <meta charset="utf-8">
+   <link rel="stylesheet" href="spreadsheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="roster.js"></script>
     <script language="javascript" type="text/javascript" src="notify.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+
+<body>
+
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>Tolako Lodge 2017</h1>
+    <p>Created by Erik Gunderson and Braulio Resendiz</p>
+      <p>Click buttons who you want to sort out to message.</p>
+  </div>
+</div>
+
+<div class="container-fluid bg-3 text-center">
+  <br>
+  <div class="row">
+    <div class="col-sm-3">
+        <button type="button" onclick="sortData('Ordeal', 'level')" class="btn btn-success btn-lg">Ordeal</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" onclick="sortData('Fairfax', 'locations')" class="btn btn-danger btn-lg">Fairfax</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" onclick="sortData('Mill Valley', 'locations')" class="btn btn-danger btn-lg">Mill Valley</button>
+    </div>
+    <div class="col-sm-3">
+     <button type="button" onclick="sortData('Larkspur', 'locations')" class="btn btn-danger btn-lg">Larkspur</button>
+    </div>
+  </div>
+</div><br>
+
+<div class="container-fluid bg-3 text-center">
+  <div class="row">
+    <div class="col-sm-3">
+     <button type="button" onclick="sortData('Brotherhood', 'level')" class="btn btn-success btn-lg">Brotherhood</button>
+
+    </div>
+    <div class="col-sm-3">
+
+     <button type="button" onclick="sortData('San Rafael', 'locations')" class="btn btn-danger btn-lg">San Rafael</button>
+    </div>
+    <div class="col-sm-3">
+       <button type="button" onclick="sortData('Tiburon', 'locations')" class="btn btn-danger btn-lg">Tiburon</button>
+    </div>
+    <div class="col-sm-3">
+
+      <button type="button" onclick="sortData('Novato', 'locations')" class="btn btn-danger btn-lg">Novato</button>
+    </div>
+  </div>
+</div><br><br>
+
+    <div class="container-fluid bg-3 text-center">
+  <div class="row">
+    <div class="col-sm-3">
+        <button type="button" onclick="sortData('Vigil', 'level')" class="btn btn-success btn-lg">Vigil</button>
+
+    </div>
+    <div class="col-sm-3">
+      <button type="button" onclick="sortData('San Anselmo', 'locations')" class="btn btn-danger btn-lg">San Anselmo</button>
+    </div>
+    <div class="col-sm-3">
+
+      <button type="button" onclick="sortData('Corte Madera', 'locations')" class="btn btn-danger btn-lg">Corte Madera</button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" onclick="sortData('Belvedere', 'locations')" class="btn btn-danger btn-lg">Belvedere</button>
+    </div>
+  </div>
+</div><br><br>
+
+<footer class="container-fluid text-center">
+  <p>Message Box</p>
+</footer>
+ <div class="container-fluid bg-3 text-center">
+    <button type="button" onclick="sendData" class="btn btn-primary btn-sm">SEND</button>
+    </div>
+</body>
+
+
   </head>
   <body>
     <table class="formdata">
       <caption>2017 Lodge Roster</caption>
       <tr>
-        <th></th>
         <th scope="col">Full Name</th>
+        <th scope="col">Area</th>
         <th scope="col">Level</th>
         <th scope="col">Y/A</th>
         <th scope="col">Phone #</th>
         <th scope="col">Email Address</th>
       </tr>
-      <tr>
-        <th scope="row">1</th>
+
+
+        <tr>
         <td><input type="text" name="cFN" id="cFN" /></td>
         <td><input type="text" name="cL" id="cL" /></td>
         <td><input type="text" name="cYA" id="cYA" /></td>
@@ -28,7 +126,7 @@
         <td><input type="text" name="cEA" id="cEA" /></td>
       </tr>
       <tr>
-        <th scope="row">2</th>
+
         <td><input type="text" name="dFN" id="dFN" /></td>
         <td><input type="text" name="dL" id="dL" /></td>
         <td><input type="text" name="dYA" id="dYA" /></td>
@@ -36,29 +134,12 @@
         <td><input type="text" name="cEA" id="cEA" /></td>
       </tr>
       <tr>
-        <td>
-            <button type="button" onclick="sortData('Ordeal', 'level')" class="btn btn-danger">Ordeal</button>
-            <button type="button" onclick="sortData('Brotherhood', 'level')" class="btn btn-danger">Brotherhood</button>
-            <button type="button" onclick="sortData('Vigil', 'level')" class="btn btn-danger">Vigil</button>
-            <button type="button" onclick="displayEmails()" class="btn btn-danger">DISPLAY EMAILS</button>
-        </td>
-        <td>
-            <button type="button" onclick="sortData('Larkspur', 'locations')" class="btn btn-danger">Larkspur</button>
-            <button type="button" onclick="sortData('Fairfax', 'locations')" class="btn btn-danger">Fairfax</button>
-            <button type="button" onclick="sortData('San Rafael', 'locations')" class="btn btn-danger">San Rafael</button>
-            <button type="button" onclick="sortData('Tiburon', 'locations')" class="btn btn-danger">Tiburon</button>
-            <button type="button" onclick="sortData('Novato', 'locations')" class="btn btn-danger">Novato</button>
-            <button type="button" onclick="sortData('Mill Valley', 'locations')" class="btn btn-danger">Mill Valley</button>
-            <button type="button" onclick="sortData('San Anselmo', 'locations')" class="btn btn-danger">San Anselmo</button>
-            <button type="button" onclick="sortData('Corte Madera', 'locations')" class="btn btn-danger">Corte Madera</button>
-            <button type="button" onclick="sortData('Belvedere', 'locations')" class="btn btn-danger">Belvedere</button>
-        </td>
         <td></td>
         <td><button id="place-holder" style="display: none;">PLACE HOLDER</button></td>
         <td><button id="place-holder" style="display: none;">PLACE HOLDER</button></td>
         <td>
             <script type="text/javascript">
-                document.write(initialize("roster.js"))
+                //document.write(initialize("roster.js"))
             </script>
         </td>
       </tr>

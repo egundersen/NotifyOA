@@ -21,7 +21,8 @@ textbox{
         }
 
 
-table.formdata {
+
+/*table.formdata {
   border: 1px solid #5F6F7E;
   border-collapse: collapse;
   margin: 1em 0 2em 0;
@@ -47,3 +48,5 @@ table.formdata input {
   border-width: 0;
   border-style: none;
 }
+*/
+
