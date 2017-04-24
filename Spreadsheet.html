@@ -10,9 +10,14 @@
     <script language="javascript" type="text/javascript" src="notify.js"></script>
 </head>
 <body>
-<form method="post" action="spreadsheet.html">
+  <input type="text" value="" placeholder="Put message here" class=".textbox">
+    <input type="submit" value="Send"  class=".sent">
+
+    <p/>
+ <form method="post" action="spreadsheet.html">
 <table class="formdata" summary="This table contains a form">
-  <caption>2017 Lodge Roster</caption>
+
+    <caption>2017 Lodge Roster</caption>
   <tr>
     <th></th>
     <th scope="col">Full Name</th>
@@ -37,7 +42,8 @@
     <td><input type="text" name="dPN" id="dPN" /></td>
 	<td><input type="text" name="cEA" id="cEA" /></td>
   </tr>
-  <tr>
+
+    <tr>
 	<td>
 		<script>
 			document.write(readFile("roster.js"));

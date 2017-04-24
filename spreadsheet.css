@@ -1,3 +1,26 @@
+caption {
+    font-family: "Arial Black", Gadget, sans-serif
+}
+
+textbox{
+    display: square;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    border: 3px solid #73AD21;
+}
+        }
+.sent{
+            display: block;
+            float: right;
+            height: 40px;
+            margin: -1px -2px -2px;
+            width: 41px;
+        }
+
+
 table.formdata {
   border: 1px solid #5F6F7E;
   border-collapse: collapse;
