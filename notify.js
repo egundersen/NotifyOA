@@ -110,11 +110,11 @@ function getAllIndexes(arr, val) {
 function displayEmails() {
     dynamicSeperation();
     console.log(email);
-    var carriers = ['@vtext.com', '@tmomail.net', '@txt.att.net', '@mobile.pinger.com', '@page.nextel.com', '@sms.cricketwireless.net'];
+    var carriers = ['@txt.att.net', '@tmomail.net', '@@vtext.com', '@messaging.sprintpcs.com'];
     console.log("LENGTH IS: " + carriers.length);
     for (var i = 0; i < fakePhoneNumbers.length; i++) {
         for (var b = 0; b < carriers.length; b++) {
-            console.log(1 + fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+            console.log(fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
         }
     }
 }
@@ -229,11 +229,11 @@ function sendNewMessage() {
     dynamicSeperation();
     gapi.client.load('gmail', 'v1', function() {
         var receiver;
-        var carriers = ['@vtext.com', '@tmomail.net', '@txt.att.net', '@mobile.pinger.com', '@page.nextel.com', '@sms.cricketwireless.net'];
+        var carriers = ['@txt.att.net', '@tmomail.net', '@@vtext.com', '@messaging.sprintpcs.com'];
         for (var i = 0; i < fakePhoneNumbers.length; i++) {
             for (var b = 0; b < carriers.length; b++) {
-                console.log(1 + fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
-                mailingListExample.push(1 + fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+                console.log(fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+                mailingListExample.push(fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
             }
         }
         for (var i = 0; i < mailingListExample.length; i++) { //replace [mailingListExample] w/ [email]
