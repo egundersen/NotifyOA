@@ -16,7 +16,8 @@ var name = null;
 function initialize(roster){
     filterData(roster);
     staticSeperation();
-    document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+    //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+    return "";
 }
 
 //## Read Roster from JSON file and store data in 'myData'
