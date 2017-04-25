@@ -98,56 +98,17 @@
 
 <footer class="container-fluid text-center" >
   <p>Message Box</p>
-   <input type="text"/>
+    <textarea rows="8" cols="45"> </textarea>
 </footer>
  <div class="container-fluid bg-3 text-center">
     <button type="button" onclick="sendData" class="btn btn-primary btn-sm">SEND</button>
     </div>
 </body>
-
-
-  </head>
-  <body>
-    <table class="formdata">
-      <caption>2017 Lodge Roster</caption>
-      <tr>
-        <th scope="col">Full Name</th>
-        <th scope="col">Area</th>
-        <th scope="col">Level</th>
-        <th scope="col">Y/A</th>
-        <th scope="col">Phone #</th>
-        <th scope="col">Email Address</th>
-      </tr>
-
-
-        <tr>
-        <td><input type="text" name="cFN" id="cFN" /></td>
-        <td><input type="text" name="cL" id="cL" /></td>
-        <td><input type="text" name="cYA" id="cYA" /></td>
-        <td><input type="text" name="cPN" id="cPN" /></td>
-        <td><input type="text" name="cEA" id="cEA" /></td>
-      </tr>
-      <tr>
-
-        <td><input type="text" name="dFN" id="dFN" /></td>
-        <td><input type="text" name="dL" id="dL" /></td>
-        <td><input type="text" name="dYA" id="dYA" /></td>
-        <td><input type="text" name="dPN" id="dPN" /></td>
-        <td><input type="text" name="cEA" id="cEA" /></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><button id="place-holder" style="display: none;">PLACE HOLDER</button></td>
-        <td><button id="place-holder" style="display: none;">PLACE HOLDER</button></td>
-        <td>
+       <td>
             <script type="text/javascript">
                 document.write(initialize("roster.js"))
             </script>
         </td>
-      </tr>
-    </table>
-    <div><input type="submit" name="btnSubmit" id="btnSubmit" value="Add Data" /></div>
-    <p>Gmail API W0RK1NG</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize-button" style="display: none;">Authorize</button>
@@ -164,5 +125,9 @@
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-  </body>
+
+    </head>
 </html>
+
+
+

@@ -239,7 +239,7 @@ function sendNewMessage() {
 
             // Encode to Base64
             var to = receiver,
-            subject = 'Hello World',
+            subject = 'Talako Lodge Message',
             content = 'send a Gmail.'
 
             var base64EncodedEmail = btoa(
