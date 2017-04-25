@@ -55,7 +55,7 @@ function sortData(toggle, attribute){
             console.log("All Names Removed, add names...")
             console.log(dynamicRoster);
             // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
-            //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+            document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
             return "Exit"
     }
     if (dynamicRoster.All[indexes[0]] == 555) {
