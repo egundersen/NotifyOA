@@ -1,104 +1,79 @@
-//Temporary Variables (This will all be removed later, so theyeres no point paying attention to them :p)
-var mailingListExample;
-var fakePhoneNumbers = ['(415) 235-9527', '(415) 425-9091']; //Jack: '(415) 879-1674'
-//End of temporary variables
-
 var dynamicRoster;
 var staticRoster;
-var myData = null;
-var level = null;
-var locations = null
-var email = null;
-var phoneNumber = null;
-var name = null;
 
-//## This function is called on startup. It starts every other function
+/**
+ * Initializes setup
+ * @param   {string} roster The name of the roster
+ * @returns {string}   void
+ */
 function initialize(roster){
     filterData(roster);
     staticSeperation();
-    document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+    return "";
 }
 
-//## Read Roster from JSON file and store data in 'myData'
+/**
+ * Reads roster from JSON file and stores data in myData
+ * @param {string} roster The name of the roster
+ */
 function readFile(roster) {
     $.getJSON(roster, function(json) {
         myData = json;
     });
 }
 
-//## Create new "rosters" using the ajax roster we created above /\
+/**
+ * Create two new rosters using the roster we found with ajax
+ * @param {string} roster The name of the roster
+ */
 function filterData(roster) {
     $.ajaxSetup({
         async: false
     });
     readFile("roster.js");
-    var exampleEmails = "erikgundersen.200@gmail.com,brauliocordova3@gmail.com,555";
-    mailingListExample = exampleEmails.split(',');
-    //console.log(myData.All[0].City)
 
     //Set ajax Array equal to new static & dynamic arrays
     staticRoster = JSON.parse(JSON.stringify(myData));
     dynamicRoster = myData;
-
 }
 
-//## Called every time someone presses a button. This disables/enables levels & location searches
+/**
+ * Sorts the data on button press
+ * @param   {string} toggle    Specific value such as San Rafael
+ * @param   {string} attribute Name of category that includes toggle. Ex: locations
+ * @returns {string}   Exit the function on void
+ */
 function sortData(toggle, attribute){
     staticSeperation();
     dynamicSeperation();
-    console.log("SortData called...")
-    var indexes = getAllIndexes(eval(attribute), toggle);
-    if (dynamicRoster.All[indexes[0]] != 555) {
-        for (var i = indexes.length -1; i >= 0; i--)
-            dynamicRoster.All[indexes[i]] = 555;
-            console.log("All Names Removed, add names...")
-            console.log(dynamicRoster);
-            // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
-            //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
-            return "Exit"
-    }
-    if (dynamicRoster.All[indexes[0]] == 555) {
-        for (var i = indexes.length -1; i >= 0; i--)
-            dynamicRoster.All[indexes[i]] = staticRoster.All[indexes[i]];
-            console.log("All Names Includes, removing names...")
-            console.log(dynamicRoster);
-            // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
-            //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
-            return "Exit"
-    }
-    /*staticSeperation();
-    dynamicSeperation();
-    console.log("SortData called...")
-    var indexes = getAllIndexes(eval(attribute), toggle);
-    var attributeVariable = eval(attribute)
-    console.log(eval(attribute)[indexes[0]]);
+    var indexes = getAllIndexes(eval(attribute + "Static"), toggle);
     if (eval(attribute)[indexes[0]] != 555) {
         for (var i = indexes.length -1; i >= 0; i--) {
             eval(attribute)[indexes[i]] = 555;
             dynamicRoster.All[indexes[i]] = 555;
         }
-            console.log("All Names Removed, add names...")
-            console.log(dynamicRoster);
             // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
             //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
             return "Exit"
     }
     if (eval(attribute)[indexes[0]] == 555) {
-        console.log("Oh... look at that!@!!!!!!!!!!!!!!!!!!!!!")
         for (var i = indexes.length -1; i >= 0; i--) {
-            eval(attribute)[indexes[i]] = staticRoster.All.map(function(a) {return a.attributeVariable;});
+            eval(attribute)[indexes[i]] = eval(attribute + "Static")[indexes[i]];
             dynamicRoster.All[indexes[i]] = staticRoster.All[indexes[i]];
         }
             //console.log(staticRoster.All.map(function(a) {return a.eval(attribute);}));
-            console.log("All Names Includes, removing names...")
-            console.log(dynamicRoster);
             // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
             //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
             return "Exit"
-    }*/
+    }
 }
 
-//## Find all array indexes with specific value
+/**
+ * Find all array indexes with specific value
+ * @param   {Array} arr Input array
+ * @param   {string} val Value in array
+ * @returns {number} Index number of value in array
+ */
 function getAllIndexes(arr, val) {
     var indexes = [], i;
     for(i = 0; i < arr.length; i++)
@@ -107,28 +82,50 @@ function getAllIndexes(arr, val) {
     return indexes;
 }
 
+
+/**
+ * Test function built for printing current phone numbers and emails in the console
+ */
 function displayEmails() {
     dynamicSeperation();
-    console.log(email);
     var carriers = ['@txt.att.net', '@tmomail.net', '@@vtext.com', '@messaging.sprintpcs.com'];
-    console.log("LENGTH IS: " + carriers.length);
-    for (var i = 0; i < fakePhoneNumbers.length; i++) {
-        for (var b = 0; b < carriers.length; b++) {
-            console.log(fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+        console.log(email);
+        for (var i = 0; i < phoneNumber.length; i++) {
+            for (var b = 0; b < carriers.length; b++) {
+                console.log(phoneNumber[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
         }
     }
 }
 
-//## Seperate Roster data into multiple (easily manageable) sections
-function staticSeperation() {
-    dynamicSeperation();
-    // Search by Location
-    locations = staticRoster.All.map(function(a) {return a.City;});
-    //Search by Level
-    level = staticRoster.All.map(function(a) {return a.Level;});
-}
 
-//## Updates the new update and email lists
+/**
+ * Seperates the Roster data into multiple (easily manageable) sections
+ * @returns {function} sets the seperated data only once
+ */
+var staticSeperation = (function() {
+    var executed = false;
+    return function () {
+        if (!executed) {
+            executed = true;
+
+            // Search by Location
+            locations = staticRoster.All.map(function(a) {return a.City;});
+
+            //Search by Level
+            level = staticRoster.All.map(function(a) {return a.Level;});
+
+            //Search by level (Static)
+            levelStatic = staticRoster.All.map(function(a) {return a.Level;});
+
+            //Search by level (Static)
+            locationsStatic = staticRoster.All.map(function(a) {return a.City;});
+        }
+    };
+})();
+
+/**
+ * Seperates and updates the Roster Data
+ */
 function dynamicSeperation() {
     //Search by Name
     name = dynamicRoster.All.map(function(a) {return a["Full Name"];});
@@ -180,8 +177,7 @@ function initClient() {
      signoutButton.onclick = handleSignoutClick;
      sendEmailButton.onclick = handleSendEmailClick;
 
-     console.log(mailingListExample);
-     console.log("placeholder emails have been sent...");
+     console.log("Client initialized...");
   });
 }
 
@@ -220,24 +216,26 @@ function handleSignoutClick(event) {
  *  Send an email upon button click.
  */
 function handleSendEmailClick(event) {
-    console.log("Handling sendNewMessage()...");
+    console.log(" sendNewMessage()...");
     sendNewMessage();
 }
 
-//## Simply Put, this function takes every email left on the roster after filtering (dynamicRoster), encodes the message/emails into Base64, and finally sends the email
+/**
+ * Takes every email left on the roster after filtering, encodes emails into Base64, and sends them.
+ */
 function sendNewMessage() {
     dynamicSeperation();
     gapi.client.load('gmail', 'v1', function() {
         var receiver;
         var carriers = ['@txt.att.net', '@tmomail.net', '@@vtext.com', '@messaging.sprintpcs.com'];
-        for (var i = 0; i < fakePhoneNumbers.length; i++) {
+        for (var i = 0; i < phoneNumber.length; i++) {
             for (var b = 0; b < carriers.length; b++) {
-                console.log(fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
-                mailingListExample.push(fakePhoneNumbers[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+                console.log(phoneNumber[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
+                email.push(phoneNumber[i].replace(/[/-]/g,'').replace(/[' )(']/g,'') + carriers[b]);
             }
         }
-        for (var i = 0; i < mailingListExample.length; i++) { //replace [mailingListExample] w/ [email]
-            receiver = mailingListExample[i]; //replace [mailingListExample] w/ [email]
+        for (var i = 0; i < email.length; i++) {
+            receiver = email[i];
 
             // Encode to Base64
             var to = receiver,
