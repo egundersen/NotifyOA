@@ -224,6 +224,8 @@ function handleSendEmailClick(event) {
  * Takes every email left on the roster after filtering, encodes emails into Base64, and sends them.
  */
 function sendNewMessage() {
+    var emailText = document.getElementById("myText").value;
+    var emailTitle = document.getElementById("myTitle").value;
     dynamicSeperation();
     gapi.client.load('gmail', 'v1', function() {
         var receiver;
@@ -248,9 +250,9 @@ function sendNewMessage() {
                 "Content-Transfer-Encoding: message/rfc2822\n" +
                 "to: " + receiver + "\n" +
                 "from: \"test\" <erikgundersen.200@gmail.com>\n" +
-                "subject: Hello world\n\n" +
+                "subject: " + emailTitle + "\n\n" +
 
-                "The actual message text goes here"
+                emailText
             ).replace(/\+/g, '-').replace(/\//g, '_');
 
             var mail= base64EncodedEmail;
