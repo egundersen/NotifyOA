@@ -43,7 +43,8 @@ function filterData(roster) {
  * @param   {string} attribute Name of category that includes toggle. Ex: locations
  * @returns {string}   Exit the function on void
  */
-function sortData(toggle, attribute){
+function sortData(toggle, attribute, btnNum){
+    var button = document.getElementById("btn" + btnNum).value;
     staticSeperation();
     dynamicSeperation();
     var indexes = getAllIndexes(eval(attribute + "Static"), toggle);
@@ -54,6 +55,7 @@ function sortData(toggle, attribute){
         }
             // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
             //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+            //document.getElementById("btn" + btnNum).style.background='#a3d7a3';
             return "Exit"
     }
     if (eval(attribute)[indexes[0]] == 555) {
@@ -64,6 +66,7 @@ function sortData(toggle, attribute){
             //console.log(staticRoster.All.map(function(a) {return a.eval(attribute);}));
             // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
             //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
+            //document.getElementById("btn" + btnNum).style.background='#5cb85c';
             return "Exit"
     }
 }
