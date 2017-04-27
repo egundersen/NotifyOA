@@ -36,6 +36,8 @@
     <p>Created by Erik Gunderson and Braulio Resendiz</p>
       <p>Click buttons who you want to sort out to message. When the button changes color thats the section you are selecting.</p>
       <button type="button" onclick="displayEmails()" class="btn btn-success btn-lg">DISPLAY EMAIL TEST FUNCTION</button>
+      <button type="button" id="authorize-button" style="display: none;">Authorize</button>
+      <button type="button" id="signout-button" style="display: none;">Sign Out</button>
   </div>
 </div>
 
@@ -100,8 +102,8 @@
   <p>Message Box</p>
     <textarea rows="8" cols="45"> </textarea>
 </footer>
- <div class="container-fluid bg-3 text-center">
-    <button type="button" onclick="sendData" class="btn btn-primary btn-sm">SEND</button>
+    <div class="container-fluid bg-3 text-center">
+        <button id="send-email-button" type="button" class="btn btn-primary btn-sm">SEND</button>
     </div>
 </body>
        <td>
@@ -110,16 +112,9 @@
             </script>
         </td>
 
-    <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize-button" style="display: none;">Authorize</button>
-    <button id="signout-button" style="display: none;">Sign Out</button>
-    <button id="send-email-button" style="display: none;">Send Mail</button>
-
     <pre id="content"></pre>
 
-    <script type="text/javascript" src="notify.js">
-
-    </script>
+    <script type="text/javascript" src="notify.js"></script>
 
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
