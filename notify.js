@@ -278,8 +278,10 @@ function listLabels() {
     });
 }
 
+
 function switchColors(element) {
-    links = document.getElementsByTagName("button");
-    for (var i = 0; i < links.length; i++) links.item(i).style.color = 'white';
-    element.style.color = 'orange';
+colorC=document.getElementsByTagName("button") ;
+for (var i = 0 ; i < colorC.length ; i ++)
+colorC.item(i).style.color = 'white' ;
+element.style.color='orange' ;
 }
