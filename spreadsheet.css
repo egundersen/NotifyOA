@@ -2,7 +2,6 @@ caption {
     font-family: "Arial Black", Gadget, sans-serif
 }
 
-
 .div {
     text-align: left;
     word-wrap: break-word;
@@ -12,6 +11,9 @@ caption {
     border: 1px solid blue;
 }
 
+btn {
+    background-color: blue;
+}
 
 
 /*table.formdata {
@@ -41,4 +43,3 @@ table.formdata input {
   border-style: none;
 }
 */
-

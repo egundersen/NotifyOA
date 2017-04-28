@@ -1,130 +1,117 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Gmail API Quickstart</title>
-
-
-  <title>Bootstrap</title>jQuery-xcolor-master
-  <meta charset="utf-8">
-   <link rel="stylesheet" href="spreadsheet.css">
+    <title>Bootstrap</title>jQuery-xcolor-master
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="spreadsheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="roster.js"></script>
     <script language="javascript" type="text/javascript" src="notify.js"></script>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
 
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-  </style>
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+        /* Add a gray background color and some padding to the footer */
 
-<body>
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+    </style>
 
-<div class="jumbotron">
-  <div class="container text-center">
-    <h1>Tolako Lodge 2017</h1>
-    <p>Created by Erik Gunderson and Braulio Resendiz</p>
-      <p>Click buttons who you want to sort out to message. When the button changes color thats the section you are selecting.</p>
-      <button type="button" onclick="displayEmails()" class="btn btn-success btn-lg">DISPLAY EMAIL TEST FUNCTION</button>
-      <button type="button" id="authorize-button" style="display: none;">Authorize</button>
-      <button type="button" id="signout-button" style="display: none;">Sign Out</button>
-  </div>
-</div>
-
-<div class="container-fluid bg-3 text-center">
-  <br>
-  <div class="row">
-    <div class="col-sm-3">
-        <button type="button" onclick="sortData('Ordeal', 'level', 1)" class="btn btn-success btn-lg" id="btn1">Ordeal</button>
-    </div>
-    <div class="col-sm-3">
-      <button type="button" onclick="sortData('Fairfax', 'locations', 2)" class="btn btn-danger btn-lg" id="btn2">Fairfax</button>
-    </div>
-    <div class="col-sm-3">
-      <button type="button" onclick="sortData('Mill Valley', 'locations', 3)" class="btn btn-danger btn-lg" id="btn3">Mill Valley</button>
-    </div>
-    <div class="col-sm-3">
-     <button type="button" onclick="sortData('Larkspur', 'locations', 4)" class="btn btn-danger btn-lg" id="btn4">Larkspur</button>
-    </div>
-  </div>
-</div><br>
-
-<div class="container-fluid bg-3 text-center">
-  <div class="row">
-    <div class="col-sm-3">
-     <button type="button" onclick="sortData('Brotherhood', 'level', 5)" class="btn btn-success btn-lg" id="btn5">Brotherhood</button>
-
-    </div>
-    <div class="col-sm-3">
-
-     <button type="button" onclick="sortData('San Rafael', 'locations', 6)" class="btn btn-danger btn-lg" id="btn6">San Rafael</button>
-    </div>
-    <div class="col-sm-3">
-       <button type="button" onclick="sortData('Tiburon', 'locations', 7)" class="btn btn-danger btn-lg" id="btn7">Tiburon</button>
-    </div>
-    <div class="col-sm-3">
-
-      <button type="button" onclick="sortData('Novato', 'locations', 8)" class="btn btn-danger btn-lg" id="btn8">Novato</button>
-    </div>
-  </div>
-</div><br><br>
-
-    <div class="container-fluid bg-3 text-center">
-  <div class="row">
-    <div class="col-sm-3">
-        <button type="button" onclick="sortData('Vigil', 'level', 9)" class="btn btn-success btn-lg" id="btn9">Vigil</button>
-
-    </div>
-    <div class="col-sm-3">
-      <button type="button" onclick="sortData('San Anselmo', 'locations', 10)" class="btn btn-danger btn-lg" id="btn10">San Anselmo</button>
-    </div>
-    <div class="col-sm-3">
-
-      <button type="button" onclick="sortData('Corte Madera', 'locations', 11)" class="btn btn-danger btn-lg" id="btn11">Corte Madera</button>
-    </div>
-    <div class="col-sm-3">
-      <button type="button" onclick="sortData('Belvedere', 'locations', 12)" class="btn btn-danger btn-lg" id="btn12">Belvedere</button>
-    </div>
-  </div>
-</div><br><br>
-
-<footer class="container-fluid text-center" >
-  <p>Title Box</p>
-    <input type="text" id="myTitle">
-  <p><br>Message Box</p>
-    <textarea rows="8" cols="45" id="myText"> </textarea>
-</footer>
-    <div class="container-fluid bg-3 text-center">
-        <button id="send-email-button" type="button" class="btn btn-primary btn-sm">SEND</button>
-    </div>
-</body>
-       <td>
-            <script type="text/javascript">
-                document.write(initialize("roster.js"))
-            </script>
-        </td>
-
-    <pre id="content"></pre>
-
+    <body>
+        <div class="jumbotron">
+            <div class="container text-center">
+                <h1>Tolako Lodge 2017</h1>
+                <p>Created by Erik Gunderson and Braulio Resendiz</p>
+                <p>Click buttons who you want to sort out to message. When the button changes color thats the section you are selecting.</p>
+                <button type="button" onclick="displayEmails()" class="btn btn-success btn-lg">DISPLAY EMAIL TEST FUNCTION</button>
+                <button type="button" id="authorize-button" style="display: none;">Authorize</button>
+                <button type="button" id="signout-button" style="display: none;">Sign Out</button>
+            </div>
+        </div>
+        <div class="container-fluid bg-3 text-center">
+            <br>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Ordeal', 'level', 1)" class="btn btn-success btn-lg" id="btn1">Ordeal</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Fairfax', 'locations', 2)" class="btn btn-danger btn-lg" id="btn2">Fairfax</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Mill Valley', 'locations', 3)" class="btn btn-danger btn-lg" id="btn3">Mill Valley</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Larkspur', 'locations', 4)" class="btn btn-danger btn-lg" id="btn4">Larkspur</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container-fluid bg-3 text-center">
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Brotherhood', 'level', 5)" class="btn btn-success btn-lg" id="btn5">Brotherhood</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('San Rafael', 'locations', 6)" class="btn btn-danger btn-lg" id="btn6">San Rafael</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Tiburon', 'locations', 7)" class="btn btn-danger btn-lg" id="btn7">Tiburon</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Novato', 'locations', 8)" class="btn btn-danger btn-lg" id="btn8">Novato</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="container-fluid bg-3 text-center">
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Vigil', 'level', 9)" class="btn btn-success btn-lg" id="btn9">Vigil</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('San Anselmo', 'locations', 10)" class="btn btn-danger btn-lg" id="btn10">San Anselmo</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Corte Madera', 'locations', 11)" class="btn btn-danger btn-lg" id="btn11">Corte Madera</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" onclick="switchColors(this)" "sortData('Belvedere', 'locations', 12)" class="btn btn-danger btn-lg" id="btn12">Belvedere</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <footer class="container-fluid text-center">
+            <p>Subject Box</p>
+            <input type="text" id="mySubject">
+            <p>
+                <br>Message Box</p>
+            <textarea rows="8" cols="45" id="myText"> </textarea>
+        </footer>
+        <div class="container-fluid bg-3 text-center">
+            <button id="send-email-button" type="button" class="btn btn-primary btn-sm">SEND</button>
+        </div>
+    </body>
+    <td>
+        <script type="text/javascript">
+            document.write(initialize("roster.js"))
+        </script>
+    </td> <pre id="content"></pre>
     <script type="text/javascript" src="notify.js"></script>
-
-    <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
+</head>
 
-    </head>
 </html>
-
-
-

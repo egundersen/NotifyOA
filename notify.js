@@ -305,3 +305,10 @@ function listLabels() {
         }
     });
 }
+function switchColors(element)  {
+
+links=document.getElementsByTagName("li") ;
+for (var i = 0 ; i < links.length ; i ++)
+links.item(i).style.color = 'black' ;
+element.style.color='orange' ;
+}
