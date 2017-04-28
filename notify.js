@@ -278,10 +278,11 @@ function listLabels() {
     });
 }
 
-
 function switchColors(element) {
-colorC=document.getElementsByTagName("button") ;
-for (var i = 0 ; i < colorC.length ; i ++)
-colorC.item(i).style.color = 'white' ;
-element.style.color='orange' ;
+    if (element.style.color == "orange") {
+        element.style.color = "white";
+    }
+    else if (element.style.color = "white") {
+        element.style.color = "orange";
+    }
 }
