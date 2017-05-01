@@ -2,7 +2,6 @@ caption {
     font-family: "Arial Black", Gadget, sans-serif
 }
 
-
 .div {
     text-align: left;
     word-wrap: break-word;
@@ -11,8 +10,6 @@ caption {
     padding: 50px;
     border: 1px solid blue;
 }
-
-
 
 /*table.formdata {
   border: 1px solid #5F6F7E;
@@ -41,4 +38,3 @@ table.formdata input {
   border-style: none;
 }
 */
-
