@@ -76,6 +76,7 @@ function getAllIndexes(arr, val) {
 function displayEmails() {
     dynamicSeperation();
     var carriers = ['@txt.att.net', '@tmomail.net', '@@vtext.com', '@messaging.sprintpcs.com'];
+    console.log(dynamicRoster);
     console.log(email);
     for (var i = 0; i < phoneNumber.length; i++) {
         for (var b = 0; b < carriers.length; b++) {
