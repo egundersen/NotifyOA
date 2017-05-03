@@ -221,9 +221,6 @@ function sendNewMessage() {
             receiver = email[i];
 
             // Encrypt in Base64
-            var to = receiver
-                , subject = 'Talako Lodge Message'
-                , content = 'sent by Gmail.'
             var encryptedEmail = btoa("Content-Type:  text/plain; charset=\"UTF-8\"\n" + "Content-length: 5000\n" + "Content-Transfer-Encoding: message/rfc2822\n" + "to: " + receiver + "\n" + "from: \"Talako\" <erikgundersen.200@gmail.com>\n" + "subject: " + mySubject + "\n\n" + myText).replace(/\+/g, '-').replace(/\//g, '_');
             var mailToBeSent = encryptedEmail;
             console.log(mailToBeSent);
