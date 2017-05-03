@@ -38,8 +38,7 @@ function filterData(roster) {
  * @param   {string} attribute Name of category that includes toggle. Ex: locations
  * @returns {string}   Exit the function on void
  */
-function sortData(toggle, attribute, btnNum) {
-    var button = document.getElementById("btn" + btnNum).value;
+function sortData(toggle, attribute) {
     staticSeperation();
     dynamicSeperation();
     var indexes = getAllIndexes(eval(attribute + "Static"), toggle);
@@ -48,9 +47,6 @@ function sortData(toggle, attribute, btnNum) {
             eval(attribute)[indexes[i]] = 555;
             dynamicRoster.All[indexes[i]] = 555;
         }
-        // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
-        //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
-        //document.getElementById("btn" + btnNum).style.background='#a3d7a3';
         return "Exit"
     }
     if (eval(attribute)[indexes[0]] == 555) {
@@ -58,10 +54,6 @@ function sortData(toggle, attribute, btnNum) {
             eval(attribute)[indexes[i]] = eval(attribute + "Static")[indexes[i]];
             dynamicRoster.All[indexes[i]] = staticRoster.All[indexes[i]];
         }
-        //console.log(staticRoster.All.map(function(a) {return a.eval(attribute);}));
-        // The line of code below displays names. Add CSS to the below code so the names don't take up the whole screen.
-        //document.write(name.replace(/(\,.*?)\,/g, "$1<br>"));
-        //document.getElementById("btn" + btnNum).style.background='#5cb85c';
         return "Exit"
     }
 }
@@ -213,8 +205,8 @@ function handleSendEmailClick(event) {
  * Takes every email left on the roster after filtering, encodes emails into Base64, and sends them.
  */
 function sendNewMessage() {
-    var emailText = document.getElementById("myText").value;
-    var emailTitle = document.getElementById("myTitle").value;
+    var myText = document.getElementById("myText").value;
+    var mySubject = document.getElementById("mySubject").value;
     dynamicSeperation();
     gapi.client.load('gmail', 'v1', function () {
         var receiver;
@@ -227,21 +219,22 @@ function sendNewMessage() {
         }
         for (var i = 0; i < email.length; i++) {
             receiver = email[i];
-            // Encode to Base64
+
+            // Encrypt in Base64
             var to = receiver
                 , subject = 'Talako Lodge Message'
-                , content = 'send a Gmail.'
-            var base64EncodedEmail = btoa("Content-Type:  text/plain; charset=\"UTF-8\"\n" + "Content-length: 5000\n" + "Content-Transfer-Encoding: message/rfc2822\n" + "to: " + receiver + "\n" + "from: \"test\" <erikgundersen.200@gmail.com>\n" + "subject: " + emailTitle + "\n\n" + emailText).replace(/\+/g, '-').replace(/\//g, '_');
-            var mail = base64EncodedEmail;
-            console.log(mail);
-            var request = gapi.client.gmail.users.messages.send({
+                , content = 'sent by Gmail.'
+            var encryptedEmail = btoa("Content-Type:  text/plain; charset=\"UTF-8\"\n" + "Content-length: 5000\n" + "Content-Transfer-Encoding: message/rfc2822\n" + "to: " + receiver + "\n" + "from: \"Talako\" <erikgundersen.200@gmail.com>\n" + "subject: " + mySubject + "\n\n" + myText).replace(/\+/g, '-').replace(/\//g, '_');
+            var mailToBeSent = encryptedEmail;
+            console.log(mailToBeSent);
+            var inquiry = gapi.client.gmail.users.messages.send({
                 'userId': "me"
                 , 'resource': {
-                    'raw': mail
+                    'raw': mailToBeSent
                 }
             });
-            request.execute(function (response) {
-                console.log(response);
+            inquiry.execute(function (result) {
+                console.log(result);
             });
         }
     });
