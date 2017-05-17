@@ -23,14 +23,21 @@
             background-color: #f2f2f2;
             padding: 25px;
         }
-    </style>
 
+        #background {
+            height: 100%;
+            background-image: url('eagle.PNG');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+    </style>
+    <div id="background">
     <body>
         <div class="jumbotron">
             <div class="container text-center">
-                <h1>OAMES</h1>
-                <p>(Boy Scout) Order of the Arrow Mass Emailing Server</p>
-                <p>Click buttons to remove people from roster. When the button changes color, you have removed that group.</p>
+                <img src="banner.png" alt="OAMES" style="width:804px;height:228px;">
+                <p><br>Click buttons to remove people from roster. When the button turns orange, you have removed that group.</p>
                 <button type="button" id="authorize-button" style="display: none;">Authorize Gmail</button>
                 <button type="button" id="signout-button" style="display: none;">Sign Out</button>
                 <button type="button" onclick="displayEmails()" class="btn btn-success btn-lg" id="btn1">DisplayEmails</button>
@@ -110,6 +117,7 @@
     <script type="text/javascript" src="notify.js"></script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
+    </div>
 </head>
 
 </html>

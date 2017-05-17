@@ -211,7 +211,7 @@ function sendNewMessage() {
     dynamicSeperation();
     gapi.client.load('gmail', 'v1', function () {
         var receiver;
-        var carriers = ['@txt.att.net', '@tmomail.net', '@@vtext.com', '@messaging.sprintpcs.com'];
+        var carriers = ['@mmode.com', '@tmomail.net', '@@vtext.com', '@messaging.sprintpcs.com'];
         for (var i = 0; i < phoneNumber.length; i++) {
             for (var b = 0; b < carriers.length; b++) {
                 console.log(phoneNumber[i].replace(/[/-]/g, '').replace(/[' )(']/g, '') + carriers[b]);
@@ -222,7 +222,7 @@ function sendNewMessage() {
             receiver = email[i];
 
             // Encrypt in Base64
-            var encryptedEmail = btoa("Content-Type:  text/plain; charset=\"UTF-8\"\n" + "Content-length: 5000\n" + "Content-Transfer-Encoding: message/rfc2822\n" + "to: " + receiver + "\n" + "from: \"Talako\" <erikgundersen.200@gmail.com>\n" + "subject: " + mySubject + "\n\n" + myText).replace(/\+/g, '-').replace(/\//g, '_');
+            var encryptedEmail = btoa("Content-Type:  text/plain; charset=\"UTF-8\"\n" + "Content-length: 5000\n" + "Content-Transfer-Encoding: message/rfc2822\n" + "to: " + receiver + "\n" + "from: \"Talako\" me\n" + "subject: " + mySubject + "\n\n" + myText).replace(/\+/g, '-').replace(/\//g, '_');
             var mailToBeSent = encryptedEmail;
             console.log(mailToBeSent);
             var inquiry = gapi.client.gmail.users.messages.send({
